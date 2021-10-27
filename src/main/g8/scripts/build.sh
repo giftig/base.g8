@@ -10,4 +10,4 @@ sbt \
   IntegrationTest/test \
   coverageAggregate \
   coverageOff \
-  publish
+  assembly
