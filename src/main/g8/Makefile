@@ -3,3 +3,6 @@ build:
 
 test:
 	sbt test
+
+fmt:
+	sbt scalafmt
