@@ -46,7 +46,7 @@ lazy val commonSettings = Seq(
   scalacOptions ++= compilerOptions,
   organization := "$domain;format="dot-reverse"$",
   version := "0.0.1-SNAPSHOT",
-  scalaVersion := "2.13.6",
+  scalaVersion := "2.13.16",
   testOptions ++= Seq(
     Tests.Setup { cl =>
       // Workaround to avoid slf4j complaining about multi-threading during initialisation
