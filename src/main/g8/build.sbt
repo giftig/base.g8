@@ -1,5 +1,6 @@
-val akkaCoreVersion = "2.6.12"
-val akkaHttpVersion = "10.2.3"
+// Latest open source versions, to go higher will require swapping to pekko instead
+val akkaCoreVersion = "2.6.19"
+val akkaHttpVersion = "10.2.10"
 
 lazy val coreDeps = Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
