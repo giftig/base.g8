@@ -83,7 +83,7 @@ lazy val service = {
       apiURL := Some(url(s"\$docsRoot/$project;format="norm"$-service/")),
       commonSettings
     )
-    .dependsOn(core)
+    .dependsOn(core % "test->test;compile->compile")
 }
 
 lazy val root = {
