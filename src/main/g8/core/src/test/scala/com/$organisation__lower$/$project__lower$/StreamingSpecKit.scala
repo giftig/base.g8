@@ -12,7 +12,7 @@ import akka.stream.Materializer
  * includes a materializer as well to make us ready to materialise streams.
  */
 abstract class StreamingSpecKit(sys: ActorSystem) extends ActorSpecKit(sys) {
-  override protected implicit val ec: ExecutionContext = sys.dispatcher
+  override implicit val ec: ExecutionContext = sys.dispatcher
 
   override def afterAll(): Unit = {
     implicitly[Materializer].shutdown()
