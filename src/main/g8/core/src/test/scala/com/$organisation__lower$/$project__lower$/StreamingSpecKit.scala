@@ -1,0 +1,21 @@
+package com.$organisation;format="lower"$.$project;format="lower"$
+
+import scala.concurrent.ExecutionContext
+
+import akka.actor.ActorSystem
+import akka.stream.Materializer
+
+/**
+ * Superclass for tests which need to materialise streams
+ *
+ * Based on [[ActorSpecKit]] which already provides us with a managed actor system, this just
+ * includes a materializer as well to make us ready to materialise streams.
+ */
+abstract class StreamingSpecKit(sys: ActorSystem) extends ActorSpecKit(sys) {
+  override protected implicit val ec: ExecutionContext = sys.dispatcher
+
+  override def afterAll(): Unit = {
+    implicitly[Materializer].shutdown()
+    super.afterAll()
+  }
+}
