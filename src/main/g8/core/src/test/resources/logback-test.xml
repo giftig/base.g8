@@ -9,7 +9,7 @@
     </encoder>
   </appender>
 
-  <logger name="akka" level="DEBUG"/>
+  <logger name="pekko" level="DEBUG"/>
   <logger name="com.$organisation;format="lower"$" level="DEBUG"/>
 
   <root level="INFO"><appender-ref ref="FILE"/></root>

@@ -1,22 +1,20 @@
-// Latest open source versions, to go higher will require swapping to pekko instead
-val akkaCoreVersion = "2.6.19"
-val akkaHttpVersion = "10.2.10"
+val pekkoVersion = "1.2.0"
 
 lazy val coreDeps = Seq(
-  "ch.qos.logback" % "logback-classic" % "1.2.3",
-  "com.typesafe.akka" %% "akka-actor" % akkaCoreVersion,
-  "com.typesafe.akka" %% "akka-slf4j" % akkaCoreVersion,
-  "com.typesafe.akka" %% "akka-stream" % akkaCoreVersion,
-  "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
-  "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
-  "io.spray" %% "spray-json" % "1.3.5"
+  "ch.qos.logback" % "logback-classic" % "1.2.10",
+  "org.apache.pekko" %% "pekko-actor" % pekkoVersion,
+  "org.apache.pekko" %% "pekko-slf4j" % pekkoVersion,
+  "org.apache.pekko" %% "pekko-stream" % pekkoVersion,
+  "org.apache.pekko" %% "pekko-http" % pekkoVersion,
+  "org.apache.pekko" %% "pekko-http-spray-json" % pekkoVersion,
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
+  "io.spray" %% "spray-json" % "1.3.6"
 )
 
 lazy val coreTestDeps = Seq(
-  "com.typesafe.akka" %% "akka-testkit" % akkaCoreVersion % Test,
-  "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
-  "org.scalatest" %% "scalatest" % "3.2.0" % Test
+  "org.apache.pekko" %% "pekko-testkit" % pekkoVersion % Test,
+  "org.apache.pekko" %% "pekko-http-testkit" % pekkoVersion % Test,
+  "org.scalatest" %% "scalatest" % "3.2.19" % Test
 )
 
 lazy val allCoreDeps = coreDeps ++ coreTestDeps
@@ -24,7 +22,7 @@ lazy val allCoreDeps = coreDeps ++ coreTestDeps
 // CI should use fatal warnings, but if you want to turn that off locally to avoid warnings being
 // promoted to errors while you're still getting your code compiling, you can set this env var
 lazy val useFatalWarnings = !sys.env.get("$organisation;format="upper"$_NO_FATAL_WARNINGS").contains("1")
-lazy val fatalWarnings = if (useFatalWarnings) Some("-Xfatal-warnings") else None
+lazy val fatalWarnings = if (useFatalWarnings) Some("-Werror") else None
 
 // Easy tweaking of scale factor because our build might run on a very slow CI box
 // More info on scale factor at https://www.scalatest.org/user_guide/using_scalatest_with_sbt
@@ -34,19 +32,14 @@ lazy val compilerOptions = Seq(
   "-unchecked",
   "-deprecation",
   "-feature",
-  "-Xlint",
-  "-Ywarn-unused:implicits",
-  "-Ywarn-unused:imports",
-  "-Ywarn-unused:patvars",
-  "-Ywarn-unused:privates",
-  "-Ywarn-dead-code"
+  "-Wunused:implicits,imports,patvars,privates",
 ) ++ fatalWarnings
 
 lazy val commonSettings = Seq(
   scalacOptions ++= compilerOptions,
   organization := "$domain;format="dot-reverse"$",
   version := "0.0.1-SNAPSHOT",
-  scalaVersion := "2.13.16",
+  scalaVersion := "3.7.2",
   testOptions ++= Seq(
     Tests.Setup { cl =>
       // Workaround to avoid slf4j complaining about multi-threading during initialisation

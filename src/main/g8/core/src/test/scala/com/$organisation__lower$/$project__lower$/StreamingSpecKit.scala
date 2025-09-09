@@ -2,8 +2,8 @@ package com.$organisation;format="lower"$.$project;format="lower"$
 
 import scala.concurrent.ExecutionContext
 
-import akka.actor.ActorSystem
-import akka.stream.Materializer
+import org.apache.pekko.actor.ActorSystem
+import org.apache.pekko.stream.Materializer
 
 /**
  * Superclass for tests which need to materialise streams

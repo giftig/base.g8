@@ -1,9 +1,9 @@
 # base.g8
 
-A quickstart for a basic empty akka + akka http project, preconfigured with some helpful settings.
+A quickstart for a basic empty pekko + pekko http project, preconfigured with some helpful settings.
 
 This includes:
-  - the latest versions of akka + akka http with a reasonable license
+  - the latest versions of pekko + pekko http (at time of writing)
   - a `SpecKit` trait / helper to extend in your tests, making them all consistent (you can change the
     traits this extends if you like a different test style, but still keep things consistent across
     the board)
